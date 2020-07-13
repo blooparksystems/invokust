@@ -1,7 +1,55 @@
+This is fork repository of official. Below are the difference
+1. Removed Lamda support
+2. Modified stats output(Useful to send Elasticsearch)
+```
+{   "requests":{      
+       "GET_/test":{         
+         "method":"GET",
+         "endpoint":"/test",
+         "num.requests":27,
+         "min.response.time":113.24095726013184,
+         "median.response.time":120.0,
+         "avg.response.time":134.26058380692095,
+         "max.response.time":254.52804565429688,
+         "response.times":{
+            250.0:2,
+            120.0:14,
+            130.0:5,
+            110.0:5,
+            230.0:1
+         
+},
+         "55.pct":120.0,
+         "65.pct":120.0,
+         "75.pct":130.0,
+         "85.pct":130.0,
+         "95.pct":250.0,
+         "total.rps":0.4607327798073211,
+         "total.rpm":27.643966788439265
+      
+}
+   
+},
+   "failures":{      
+       "GET_/test":{
+         "method":"GET",
+         "endpoint":"/test",
+         "error":"HTTPError('404 Client Error: Not Found for url: http://example.com/test')",
+         "occurrences":27
+      
+}
+   
+},
+   "num.requests":27,
+   "num.requests_fail":27,
+   "start.time":1594663149.434756,
+   "end.time":1594663209.084577
+}
+```
+
 # invokust
 
 A tool for running [Locust](http://locust.io/) load tests from within Python without the need to use the locust command line. This gives more flexibility for automation such as QA/CI/CD tests and also makes it possible to run locust on [AWS Lambda](https://aws.amazon.com/lambda/) for ultimate scalability.
-
 ## Installation
 
 Install via pip:

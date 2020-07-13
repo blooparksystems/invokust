@@ -38,31 +38,30 @@ class LocustLoadTest(object):
         statistics = {
             "requests": {},
             "failures": {},
-            "num_requests": self.env.runner.stats.num_requests,
-            "num_requests_fail": self.env.runner.stats.num_failures,
-            "start_time": self.start_time,
-            "end_time": self.end_time,
+            "num.requests": self.env.runner.stats.num_requests,
+            "num.requests_fail": self.env.runner.stats.num_failures,
+            "start.time": self.start_time,
+            "end.time": self.end_time,
         }
 
         for name, value in self.env.runner.stats.entries.items():
             locust_task_name = "{0}_{1}".format(name[1], name[0])
             statistics["requests"][locust_task_name] = {
-                "request_type": name[1],
-                "num_requests": value.num_requests,
-                "min_response_time": value.min_response_time,
-                "median_response_time": value.median_response_time,
-                "avg_response_time": value.avg_response_time,
-                "max_response_time": value.max_response_time,
-                "response_times": value.response_times,
-                "response_time_percentiles": {
-                    55: value.get_response_time_percentile(0.55),
-                    65: value.get_response_time_percentile(0.65),
-                    75: value.get_response_time_percentile(0.75),
-                    85: value.get_response_time_percentile(0.85),
-                    95: value.get_response_time_percentile(0.95),
-                },
-                "total_rps": value.total_rps,
-                "total_rpm": value.total_rps * 60,
+                "method": name[1],
+                "endpoint": name[0],
+                "num.requests": value.num_requests,
+                "min.response.time": value.min_response_time,
+                "median.response.time": value.median_response_time,
+                "avg.response.time": value.avg_response_time,
+                "max.response.time": value.max_response_time,
+                "response.times": value.response_times,
+                "55.pct": value.get_response_time_percentile(0.55),
+                "65.pct": value.get_response_time_percentile(0.65),
+                "75.pct": value.get_response_time_percentile(0.75),
+                "85.pct": value.get_response_time_percentile(0.85),
+                "95.pct": value.get_response_time_percentile(0.95),
+                "total.rps": value.total_rps,
+                "total.rpm": value.total_rps * 60,
             }
 
         for id, error in self.env.runner.errors.items():
@@ -70,7 +69,12 @@ class LocustLoadTest(object):
             locust_task_name = "{0}_{1}".format(
                 error_dict["method"], error_dict["name"]
             )
-            statistics["failures"][locust_task_name] = error_dict
+            statistics["failures"][locust_task_name] = {
+                "method": error_dict['method'],
+                "endpoint": error_dict['name'],
+                "error": error_dict['error'],
+                "occurrences": error_dict['occurrences']
+            }
 
         return statistics
 

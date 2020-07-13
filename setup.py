@@ -15,8 +15,8 @@ setup(
     download_url="https://github.com/FutureSharks/invokust/archive/1.0a.tar.gz",
     license="MIT",
     scripts=["invokr.py"],
-    packages=["invokust", "invokust.aws_lambda",],
-    install_requires=["locust>=1.0.3", "boto3", "pyzmq", "numpy"],
+    packages=["invokust",],
+    install_requires=["locust>=1.0.3", "pyzmq", "numpy"],
     keywords=["testing", "loadtest", "lambda", "locust"],
     classifiers=[
         "Topic :: Software Development :: Quality Assurance",
